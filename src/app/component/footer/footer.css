@@ -1,0 +1,42 @@
+.footer {
+    background: linear-gradient(135deg, #ff6f61, #d6a4a4);
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer .social-icons {
+    margin: 6px 0;
+}
+
+.footer .social-icons a {
+    color: #fff;
+    margin: 0 8px;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.footer .social-icons a:hover {
+    color: #ff6f61;
+}
+
+.footer .footer-links {
+    margin: 6px 0 0;
+}
+
+.footer .footer-links a {
+    color: #fff;
+    margin: 0 8px;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer .footer-links a:hover {
+    color: #ff6f61;
+}
