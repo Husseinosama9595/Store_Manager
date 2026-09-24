@@ -18,7 +18,7 @@ export class ProductDetails {
    productId = this.route.snapshot.paramMap.get('id');
 
    product?:Product
-
+ 
    returnSingleProduct(){
     if(this.productId){
       this.productservice.getProductById(this.productId).subscribe({
