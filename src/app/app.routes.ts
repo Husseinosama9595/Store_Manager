@@ -20,20 +20,20 @@ export const routes: Routes = [
     loadComponent: () =>
       import("./products/products").then((c) => c.Products),
 
-    children: [
+      children: [
 
-      {path: "", redirectTo: "productlist", pathMatch: "full" },
+        {path: "", redirectTo: "productlist", pathMatch: "full" },
 
-      {path: "addproduct", component: Addproduct },
+        {path: "addproduct", component: Addproduct },
 
-      {path: "productlist", component: ProductList },
+        {path: "productlist", component: ProductList },
 
-      {path:"productdetails/:id",component:ProductDetails},
+        {path:"productdetails/:id",component:ProductDetails},
 
-      {path:"**",component:Notfound}
+        {path:"**",component:Notfound}
 
 
-    ]
+      ]
   },
     {path:"**",component:Notfound}
 ];
