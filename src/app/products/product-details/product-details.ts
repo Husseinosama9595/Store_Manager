@@ -20,9 +20,16 @@ export class ProductDetails {
   }
 
 
-   productId = this.route.snapshot.paramMap.get('id');
+  productId = this.route.snapshot.paramMap.get('id');
 
-   product?:Product
+  product?:Product
+   
+  selectedImage = '';
+
+  selectImage(image:string){
+    this.selectedImage = image;
+   }
+
  
    returnSingleProduct(){
     if(this.productId){
@@ -30,6 +37,7 @@ export class ProductDetails {
         next:(result)=>{
           console.log("product recieved :",result);
           this.product = result.data;
+          this.selectedImage = result.data.imageCover;
           this.cdr.detectChanges();
 
           

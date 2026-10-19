@@ -6,16 +6,25 @@
     <div class="row g-5">
 
       <!-- Product Images -->
+           <!-- Product Images -->
       <div class="col-md-6">
 
         <div class="main-image">
           <img
-            [src]="product.imageCover"
+            [src]="selectedImage"
             [alt]="product.title"
           >
         </div>
 
         <div class="thumbnails mt-3">
+
+          <img
+            [src]="product.imageCover"
+            [alt]="product.title"
+            class="thumbnail"
+            [class.active]="selectedImage === product.imageCover"
+            (click)="selectImage(product.imageCover)"
+          >
 
           @for (image of product.images; track $index) {
 
@@ -23,6 +32,8 @@
               [src]="image"
               [alt]="product.title"
               class="thumbnail"
+              [class.active]="selectedImage === image"
+              (click)="selectImage(image)"
             >
 
           }
