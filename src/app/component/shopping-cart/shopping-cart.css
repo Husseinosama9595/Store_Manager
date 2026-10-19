@@ -1,0 +1,15 @@
+*{
+    margin-top:30px;
+}
+.cart-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.cart-line-total {
+  min-width: 100px;
+}

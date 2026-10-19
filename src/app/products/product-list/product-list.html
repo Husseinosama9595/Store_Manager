@@ -115,6 +115,10 @@
                 <button
                   class="btn btn-dark flex-grow-1"
                   [disabled]="product.quantity === 0"
+                  (click)="addToCart(product)"
+                  routerLink="/cart"
+
+
                 >
                   <i class="fa-solid fa-cart-shopping me-2"></i>
                   Add to Cart

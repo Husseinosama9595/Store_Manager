@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ProductService } from '../productservice';
+import { ProductService} from '../productservice';
 
 interface Category {
   _id: string;
@@ -79,6 +79,10 @@ export class ProductList {
   constructor(private productService:ProductService,private cdr:ChangeDetectorRef){
     
   }
+
+  addToCart(product:Product){
+    this.productService.addToCart(product);
+  }
   productlist?:Product[]
 
 
@@ -94,7 +98,7 @@ connectToApi(){
     },
     error:(error)=>{
       console.log(error);
-      console.log("error in the api u fucking mug");
+      console.log("error in the api");
       
       
     },

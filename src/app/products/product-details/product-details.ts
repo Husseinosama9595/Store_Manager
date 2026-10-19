@@ -1,10 +1,9 @@
 import { ProductService } from './../productservice';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../product-list/product-list';
-
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-product-details',
   styleUrl: './product-details.css',
   templateUrl: './product-details.html',
@@ -14,6 +13,12 @@ export class ProductDetails {
   private route=inject(ActivatedRoute);
   private productservice = inject(ProductService);
   private cdr = inject(ChangeDetectorRef);
+   
+  
+  addToCart(product:Product){
+    this.productservice.addToCart(product);
+  }
+
 
    productId = this.route.snapshot.paramMap.get('id');
 

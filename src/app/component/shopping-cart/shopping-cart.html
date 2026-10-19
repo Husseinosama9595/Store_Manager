@@ -1,0 +1,102 @@
+<div class="container py-5">
+
+  <h1 class="fw-bold mb-4">Your Cart</h1>
+
+  @if (cartItems.length === 0) {
+
+    <div class="text-center py-5">
+      <p class="text-muted">Your cart is empty.</p>
+        <a
+          routerLink="/products"
+          class="btn btn-dark"
+                >
+        Continue Shopping      
+        </a>
+    </div>
+
+  }
+  @else {
+
+    <div class="row g-4">
+
+      <!-- Cart Items -->
+      <div class="col-lg-8">
+
+        @for (item of cartItems; track item.product._id) {
+
+          <div class="d-flex align-items-center gap-3 border-bottom py-3">
+
+            <img
+              [src]="item.product.imageCover"
+              [alt]="item.product.title"
+              class="cart-image"
+            >
+
+            <div class="flex-grow-1">
+              <h6 class="mb-1">{{ item.product.title }}</h6>
+              <small class="text-muted">{{ item.product.price }} EGP</small>
+            </div>
+
+            <div class="btn-group">
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                (click)="changeQuantity(item.product._id, -1)"
+              >-</button>
+
+              <span class="btn btn-sm disabled">{{ item.quantity }}</span>
+
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                [disabled]="item.quantity >= item.product.quantity"
+                (click)="changeQuantity(item.product._id, 1)"
+              >+</button>
+            </div>
+
+            <strong class="cart-line-total text-end">
+              {{ item.product.price * item.quantity }} EGP
+            </strong>
+
+            <button
+              class="btn btn-link text-danger"
+              title="Remove"
+              (click)="removeItem(item.product._id)"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- Order Summary -->
+      <div class="col-lg-4">
+
+        <div class="card border-0 shadow-sm p-4">
+
+          <h5 class="mb-3">Order Summary</h5>
+
+          <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
+            <span>Total</span>
+            <span>{{ total }} EGP</span>
+          </div>
+
+          <button class="btn btn-dark w-100 mb-2">
+            Checkout
+          </button>
+
+          <button class="btn btn-outline-danger w-100" (click)="clearCart()">
+            Clear Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

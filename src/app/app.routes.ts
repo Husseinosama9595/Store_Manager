@@ -1,20 +1,18 @@
 import { Routes } from '@angular/router';
-import { Home } from './component/home/home';
-import { Login } from './component/login/login';
-import { Notfound } from './component/notfound/notfound';
-import { Register } from './component/register/register';
-import { Addproduct } from './products/addproduct/addproduct';
-import { ProductList } from './products/product-list/product-list';
-import { ProductDetails } from './products/product-details/product-details';
 
 export const routes: Routes = [
     {path:"",redirectTo:"home",pathMatch:"full"},
     
-    {path:"home",component:Home},
+    {path:"home",
+      loadComponent:()=>
+      import("./component/home/home").then((c)=>c.Home)
+      
+    },
+    {path:"cart",loadComponent:()=>import("./component/shopping-cart/shopping-cart").then((c)=>c.ShoppingCart)},
 
-    {path:"register",component:Register},
+    {path:"register",loadComponent:()=>import("./component/register/register").then((c)=>c.Register)},
 
-    {path:"login",component:Login},
+    {path:"login",loadComponent:()=>import("./component/login/login").then((c)=>c.Login)},
 
     {path: "products",
     loadComponent: () =>
@@ -24,16 +22,16 @@ export const routes: Routes = [
 
         {path: "", redirectTo: "productlist", pathMatch: "full" },
 
-        {path: "addproduct", component: Addproduct },
+        {path: "addproduct",loadComponent:()=>import("./products/addproduct/addproduct").then((c)=>c.Addproduct) },
 
-        {path: "productlist", component: ProductList },
+        {path: "productlist",loadComponent:()=>import("./products/product-list/product-list").then((c)=>c.ProductList) },
 
-        {path:"productdetails/:id",component:ProductDetails},
+        {path:"productdetails/:id",loadComponent:()=>import("./products/product-details/product-details").then((c)=>c.ProductDetails)},
 
-        {path:"**",component:Notfound}
+        {path:"**",loadComponent:()=>import("./component/notfound/notfound").then((c)=>c.Notfound)}
 
 
       ]
   },
-    {path:"**",component:Notfound}
+    {path:"**",loadComponent:()=>import("./component/notfound/notfound").then((c)=>c.Notfound)}
 ];
