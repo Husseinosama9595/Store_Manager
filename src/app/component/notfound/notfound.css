@@ -1,24 +1,3 @@
-.custom-bg {
-    background: linear-gradient(to right, #e2e8f0, #e5e7eb);
-}
-
-.custom-btn:hover {
-    background-color: #f3e8ff !important;
-    transition: background-color 0.3s ease-in-out;
-}
-
-@media (prefers-color-scheme: dark) {
-    .custom-bg {
-        background: linear-gradient(to right, #1f2937, #111827);
-        color: white !important;
-    }
-
-    .custom-btn {
-        background-color: #374151 !important;
-        color: white !important;
-    }
-
-    .custom-btn:hover {
-        background-color: #4b5563 !important;
-    }
-}
+.custom-bg{min-height:55vh;background:linear-gradient(135deg,#f3e8df,#eadbd1)}
+.custom-btn{color:#fffaf4!important;background:#493932!important;border:0!important;border-radius:0!important}
+.custom-btn:hover{background:#704a41!important}

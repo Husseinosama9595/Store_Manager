@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Product } from '../../products/product-list/product-list';
 import { ProductService } from '../../products/productservice';
-import { RouterLink } from '@angular/router';
+
 @Component({
   imports: [RouterLink],
   selector: 'app-home',
@@ -9,33 +10,51 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.html',
 })
 export class Home {
+  private readonly productService = inject(ProductService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
-private productservice=inject(ProductService);
-private cdr=inject(ChangeDetectorRef);
-
-heroProduct?:Product
-product?:Product[]
-
-displayHomeProducts(){
-  this.productservice.getProducts().subscribe({
-    next:(result)=>{
-      this.heroProduct=result.data[0];
-      this.product=result.data.slice(1,9);
-      this.cdr.detectChanges();
+  readonly campaigns = [
+    {
+      eyebrow: 'THE NEW SEASON · 2026',
+      title: 'A softer way\nto make a statement.',
+      description: 'Considered pieces, beautiful textures, and the little details that make a look your own.',
+      image: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=2200&q=85',
+      label: '01 / NEW SEASON',
     },
-    error:(error)=>{
-      console.log(error);
-
+    {
+      eyebrow: 'MADE FOR EVERYDAY',
+      title: 'Find your\neveryday favourite.',
+      description: 'A thoughtful edit of pieces made to be reached for again and again.',
+      image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=2200&q=85',
+      label: '02 / THE EVERYDAY EDIT',
     },
-    complete:()=>{
-      console.log("succesfull api retrieval");
-    }
-  })
-}
+    {
+      eyebrow: 'THE FINISHING TOUCH',
+      title: 'Small details.\nA whole new feeling.',
+      description: 'Discover the finishing touches that bring your personal style together.',
+      image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2200&q=85',
+      label: '03 / STYLE NOTES',
+    },
+  ];
 
-ngOnInit(){
-  this.displayHomeProducts();
+  activeCampaign = 0;
+  products: Product[] = [];
 
-}
+  get campaign() {
+    return this.campaigns[this.activeCampaign];
+  }
 
+  showCampaign(index: number) {
+    this.activeCampaign = (index + this.campaigns.length) % this.campaigns.length;
+  }
+
+  ngOnInit() {
+    this.productService.getProducts().subscribe({
+      next: (result) => {
+        this.products = result.data.slice(0, 4);
+        this.cdr.detectChanges();
+      },
+      error: (error) => console.error('Could not load featured products', error),
+    });
+  }
 }

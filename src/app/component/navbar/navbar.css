@@ -1,0 +1,18 @@
+:host { display: block; }
+.announcement-bar { min-height: 29px; padding: 6px 20px; display: flex; justify-content: space-between; gap: 15px; color: #f8eee7; background: #493932; font-size: .55rem; letter-spacing: .17em; text-align: center; }
+.announcement-center { color: #dfb8a5; letter-spacing: .08em; }
+.atelier-navbar { min-height: 76px; background: rgba(251,248,243,.97); border-bottom: 1px solid #eee6dd; }
+.brand-lockup { display: flex; align-items: center; gap: 10px; color: var(--ink); font-family: var(--display); font-size: 1.45rem; letter-spacing: -.04em; line-height: 1; }
+.brand-lockup:hover { color: var(--ink); }
+.brand-mark { width: 35px; height: 35px; display: grid; place-items: center; border: 1px solid #a87666; border-radius: 50%; color: #8e6255; font-style: italic; font-size: 1.4rem; }
+.brand-lockup small { display: block; margin-top: 5px; color: #9b8176; font-family: var(--body); font-size: .48rem; letter-spacing: .17em; }
+.nav-links { gap: clamp(14px, 3vw, 42px); }
+.atelier-navbar .nav-link { position: relative; color: #594b44; font-size: .75rem; }
+.nav-links .nav-link::after { content: ''; position: absolute; left: .5rem; right: .5rem; bottom: .35rem; height: 1px; background: #a87666; transform: scaleX(0); transform-origin: left; transition: transform .2s; }
+.nav-links .nav-link:hover::after { transform: scaleX(1); }
+.nav-account { gap: 10px; }
+.cart-link { display: flex; align-items: center; gap: 7px; }
+.cart-count { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; color: white; background: #8e6255; font-size: .61rem; }
+.navbar-toggler { border-color: #d7c7ba; border-radius: 0; }
+@media (max-width: 991.98px) { .atelier-navbar .navbar-collapse { padding: 14px 0 18px; border-top: 1px solid #eee6dd; margin-top: 12px; } .nav-links { gap: 0; } .nav-account { flex-direction: row; gap: 18px; } }
+@media (max-width: 575.98px) { .announcement-bar { justify-content: center; } .announcement-bar > span:first-child, .announcement-center { display: none; } .atelier-navbar { min-height: 67px; } }

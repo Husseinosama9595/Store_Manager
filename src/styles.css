@@ -1,28 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
-html,
-body {
-    height: 100%;
-    margin: 0;  
-}
-
-body {
-    min-height: 100vh;
-}
-
-app-root {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.main-content {
-    flex: 1;
-}
-
-/* Navbar sits in normal flow and sticks to the top, so no page needs a top-margin hack */
-app-navbar {
-    display: block;
-    position: sticky;
-    top: 0;
-    z-index: 1030;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+:root { --cream: #fbf8f3; --paper: #f6eee6; --rose: #eadbd1; --ink: #302622; --muted: #796b64; --body: 'DM Sans', sans-serif; --display: 'Playfair Display', Georgia, serif; --bs-body-font-family: var(--body); --bs-body-color: var(--ink); --bs-body-bg: var(--cream); --bs-primary: #8d6254; }
+html, body { min-height: 100%; margin: 0; scroll-behavior: smooth; }
+body { min-height: 100vh; background: var(--cream); color: var(--ink); font-family: var(--body); font-size: 15px; -webkit-font-smoothing: antialiased; }
+app-root { min-height: 100vh; display: flex; flex-direction: column; }
+.main-content { flex: 1; }
+app-navbar { display: block; position: sticky; top: 0; z-index: 1030; }
+::selection { color: var(--ink); background: #e5c9ba; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #9b6555; outline-offset: 3px; }
+.btn { border-radius: 0; font-weight: 600; transition: transform .2s ease, background-color .2s ease, border-color .2s ease; }
+.btn:hover:not(:disabled) { transform: translateY(-2px); }
+.btn-dark { --bs-btn-bg: var(--ink); --bs-btn-border-color: var(--ink); --bs-btn-hover-bg: #704a41; --bs-btn-hover-border-color: #704a41; }
+.form-control { border-radius: 0; border-color: #dfd3c9; background-color: #fffdfa; padding: .8rem .9rem; }
+.form-control:focus { border-color: #9b6555; box-shadow: 0 0 0 .2rem rgba(155,101,85,.12); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
