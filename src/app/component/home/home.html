@@ -27,11 +27,11 @@
 
       <div class="col-md-6 text-center">
 
-        @if (product && product.length > 0) {
+        @if (heroProduct) {
 
           <img
-            [src]="product[6].imageCover"
-            [alt]="product[6].title"
+            [src]="heroProduct.imageCover"
+            [alt]="heroProduct.title"
             class="hero-image"
           >
 

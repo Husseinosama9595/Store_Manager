@@ -18,3 +18,11 @@ app-root {
 .main-content {
     flex: 1;
 }
+
+/* Navbar sits in normal flow and sticks to the top, so no page needs a top-margin hack */
+app-navbar {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   imports: [FormsModule, RouterLink],
@@ -10,16 +10,19 @@ import { RouterLink } from '@angular/router';
 })
 export class Login {
 
+ private router = inject(Router);
+
  logInDetails={
   email:"",
   password:""
  }
 
  
-  onSubmit(x:any){
-    if(x.valid)
+  onSubmit(form: NgForm){
+    if(form.valid)
       {
        console.log("form has been submitted and sent to backend ",this.logInDetails);
+       this.router.navigateByUrl('/home');
       }
   }
 

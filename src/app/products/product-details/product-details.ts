@@ -1,9 +1,10 @@
 import { ProductService } from './../productservice';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../product-list/product-list';
+import { CartService } from '../../services/cart.service';
 @Component({
-  imports: [RouterLink],
+  imports: [],
   selector: 'app-product-details',
   styleUrl: './product-details.css',
   templateUrl: './product-details.html',
@@ -13,10 +14,11 @@ export class ProductDetails {
   private route=inject(ActivatedRoute);
   private productservice = inject(ProductService);
   private cdr = inject(ChangeDetectorRef);
+  private cartService = inject(CartService);
    
   
   addToCart(product:Product){
-    this.productservice.addToCart(product);
+    this.cartService.add(product);
   }
 
 

@@ -22,7 +22,7 @@
 }
 
 .footer .social-icons a:hover {
-    color: #ff6f61;
+    opacity: 0.75;
 }
 
 .footer .footer-links {
@@ -38,5 +38,5 @@
 }
 
 .footer .footer-links a:hover {
-    color: #ff6f61;
+    opacity: 0.75;
 }

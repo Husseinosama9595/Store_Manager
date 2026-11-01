@@ -13,12 +13,14 @@ export class Home {
 private productservice=inject(ProductService);
 private cdr=inject(ChangeDetectorRef);
 
+heroProduct?:Product
 product?:Product[]
 
 displayHomeProducts(){
   this.productservice.getProducts().subscribe({
     next:(result)=>{
-      this.product=result.data.slice(0,7);
+      this.heroProduct=result.data[0];
+      this.product=result.data.slice(1,9);
       this.cdr.detectChanges();
     },
     error:(error)=>{

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProductService} from '../productservice';
+import { CartService } from '../../services/cart.service';
 
 interface Category {
   _id: string;
@@ -76,12 +77,12 @@ export interface ProductResponse {
 export class ProductList {
   
   
-  constructor(private productService:ProductService,private cdr:ChangeDetectorRef){
+  constructor(private productService:ProductService,private cartService:CartService,private cdr:ChangeDetectorRef){
     
   }
 
   addToCart(product:Product){
-    this.productService.addToCart(product);
+    this.cartService.add(product);
   }
   productlist?:Product[]
 

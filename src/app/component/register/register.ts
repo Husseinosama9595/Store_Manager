@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-  imports: [ReactiveFormsModule, FormsModule, RouterLink],
+  imports: [ReactiveFormsModule],
   selector: 'app-register',
   styleUrl: './register.css',
   templateUrl: './register.html',
@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 export class Register {
 
   private FB=inject(FormBuilder)
+  private router=inject(Router)
 
 get f(){
   return this.RegisterForm.controls
@@ -57,7 +58,9 @@ get f(){
 
 
   onsubmit(){
+    if(this.RegisterForm.invalid) return;
     console.log("you've succesfully signed up with the following details : ",this.RegisterForm.value);
+    this.router.navigateByUrl('/login');
     
   }
 }
