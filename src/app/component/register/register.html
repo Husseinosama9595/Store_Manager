@@ -106,6 +106,68 @@
       </div>
       }
 
+
+
+      <!--ConfirmPassword-->
+
+      
+<!-- Confirm Password -->
+<div class="form-group mb-3">
+  <label for="confirmPassword" class="form-label fw-semibold">
+    Confirm Password
+  </label>
+
+  <input
+    type="password"
+    id="confirmPassword"
+    class="form-control form-control-lg rounded-3 shadow-sm"
+    placeholder="Confirm your password"
+    formControlName="confirmPassword"
+    name="confirmPassword"
+  />
+</div>
+
+<!-- Confirm Password Validation -->
+
+@if (f.confirmPassword.invalid && f.confirmPassword.touched) {
+
+  @if (f.confirmPassword.errors?.['required']) {
+    <div class="alert alert-danger py-2 px-3 rounded-3 small">
+      Confirm password is required.
+    </div>
+  }
+
+  @if (f.confirmPassword.errors?.['minlength']) {
+    <div class="alert alert-danger py-2 px-3 rounded-3 small">
+      Confirm password must be at least 8 characters.
+    </div>
+  }
+}
+
+<!-- Password Mismatch Validation -->
+
+@if (
+  RegisterForm.hasError('passwordMismatch') &&
+  f.confirmPassword.touched
+) {
+  <div class="alert alert-danger py-2 px-3 rounded-3 small">
+    Passwords do not match!
+  </div>
+}
+
+<!-- Successful Validation -->
+
+@else if (
+  f.confirmPassword.valid &&
+  !RegisterForm.hasError('passwordMismatch') &&
+  f.confirmPassword.touched
+) {
+  <div class="alert alert-success py-2 px-3 rounded-3 small">
+    Passwords match!
+  </div>
+}
+
+
       <!-- age -->
       <div class="form-group mb-3">
         <label for="age" class="form-label fw-semibold"> age </label>

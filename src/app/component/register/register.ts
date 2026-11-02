@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 @Component({
@@ -12,24 +12,67 @@ export class Register {
   private FB = inject(FormBuilder);
   private router = inject(Router);
 
+  passwordMatchValidator: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const password = control.get("password")?.value;
+    const confirmPassword = control.get("confirmPassword")?.value;
+
+    return password === confirmPassword
+      ? null
+      : { passwordMismatch: true };
+  };
   get f() {
     return this.RegisterForm.controls;
   }
 
-  RegisterForm = this.FB.group({
-    fullname: ["", [Validators.required, Validators.minLength(3)]],
-
-    email: ["", [Validators.email, Validators.required]],
-    password: [
-      "",
-      [
-        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/),
-        Validators.required,
-        Validators.minLength(8),
+  RegisterForm = this.FB.group(
+    {
+      fullname: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(3)
+        ]
       ],
-    ],
-    age: [18, [Validators.required, Validators.min(18)]],
-  });
+
+      email: [
+        "",
+        [
+          Validators.email,
+          Validators.required
+        ]
+      ],
+
+      password: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/)
+        ]
+      ],
+
+      confirmPassword: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(8)
+        ]
+      ],
+
+      age: [
+        18,
+        [
+          Validators.required,
+          Validators.min(18)
+        ]
+      ],
+    },
+    {
+      validators: this.passwordMatchValidator
+    }
+  );
 
   onsubmit() {
     if (this.RegisterForm.invalid) return;
