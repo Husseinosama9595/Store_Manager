@@ -1,12 +1,159 @@
 <div class="container product-list-page">
-  <header class="catalog-heading"><div><p class="eyebrow">THE SHAWL WEAR EDIT</p><h1>Find something <em>lovely.</em></h1><p>Thoughtful finds, chosen with you in mind.</p></div>@if(productlist){<span class="catalog-count">{{ productlist.length }} PIECES TO DISCOVER</span>}</header>
+  <header class="catalog-heading">
+    <div>
+      <p class="eyebrow">THE SHAWL WEAR EDIT</p>
+      <h1>Find something <em>lovely.</em></h1>
+      <p>Thoughtful finds, chosen with you in mind.</p>
+    </div>
+    <span class="catalog-count"
+      >{{ filteredProducts.length }} {{ filteredProducts.length === 1 ? 'PIECE'
+      : 'PIECES' }} TO DISCOVER</span
+    >
+  </header>
+
+  <section class="catalog-controls" aria-label="Find products">
+    <label class="catalog-search"
+      ><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i
+      ><input
+        #searchBox
+        type="search"
+        [value]="searchTerm"
+        (input)="setSearch(searchBox.value)"
+        placeholder="Search products, brands, categories…"
+        aria-label="Search products, brands, and categories"
+      /><button
+        type="button"
+        aria-label="Clear search"
+        [hidden]="!searchTerm"
+        (click)="searchBox.value = ''; setSearch('')"
+      >
+        ×
+      </button></label
+    >
+    <div class="category-filter" role="group" aria-label="Filter by category">
+      @for (category of categories; track category) {
+      <button
+        type="button"
+        class="category-chip"
+        [class.active]="selectedCategory === category"
+        [attr.aria-pressed]="selectedCategory === category"
+        (click)="selectCategory(category)"
+      >
+        {{ category }}
+      </button>
+      }
+    </div>
+    <p class="results-summary">
+      Showing
+      <strong>{{ firstVisibleResult }}–{{ lastVisibleResult }}</strong> of
+      <strong>{{ filteredProducts.length }}</strong> {{ filteredProducts.length
+      === 1 ? 'result' : 'results' }}
+    </p>
+  </section>
+
+  @if (visibleProducts.length) {
   <div class="catalog-grid">
-    @for (product of productlist ?? []; track product._id; let i = $index) {
-      <article class="catalog-card">
-        <a class="catalog-image" [routerLink]="['/products/productdetails', product._id]"><img class="catalog-image-main" [src]="product.imageCover" [alt]="product.title" loading="lazy">@if (product.images?.[0]) { <img class="catalog-image-alt" [src]="product.images[0]" [alt]="product.title + ' alternate view'" loading="lazy"> }<span class="catalog-badge">{{ product.quantity === 0 ? 'SOLD OUT' : (i < 3 ? 'THE EDIT' : 'A GOOD FIND') }}</span><span class="catalog-open" aria-hidden="true">↗</span></a>
-        <div class="catalog-info"><div class="catalog-meta"><span>{{ product.brand.name }}</span><span class="rating">★ {{ product.ratingsAverage }} <small>({{ product.ratingsQuantity }})</small></span></div><h2>{{ product.title }}</h2><p class="catalog-description">{{ product.description }}</p><div class="catalog-price-row"><strong>{{ product.price }} <small>EGP</small></strong><span>{{ product.quantity === 0 ? 'Currently unavailable' : 'A few left: ' + product.quantity }}</span></div><div class="catalog-actions"><button class="btn btn-dark" [disabled]="product.quantity === 0" (click)="addToCart(product)"><i class="fa-solid fa-bag-shopping me-2" aria-hidden="true"></i>Add to bag</button><a class="catalog-detail-link" [routerLink]="['/products/productdetails', product._id]">Details</a></div></div>
-      </article>
+    @for (product of visibleProducts; track product._id; let i = $index) {
+    <article class="catalog-card">
+      <a
+        class="catalog-image"
+        [routerLink]="['/products/productdetails', product._id]"
+        ><img
+          class="catalog-image-main"
+          [src]="product.imageCover"
+          [alt]="product.title"
+          loading="lazy"
+        />@if (product.images?.[0]) {
+        <img
+          class="catalog-image-alt"
+          [src]="product.images[0]"
+          [alt]="product.title + ' alternate view'"
+          loading="lazy"
+        />
+        }<span class="catalog-badge"
+          >{{ product.quantity === 0 ? 'SOLD OUT' : (i < 3 ? 'THE EDIT' : 'A
+          GOOD FIND') }}</span
+        ><span class="catalog-open" aria-hidden="true">↗</span></a
+      >
+      <div class="catalog-info">
+        <div class="catalog-meta">
+          <span>{{ product.brand.name }}</span
+          ><span class="rating"
+            >★ {{ product.ratingsAverage }}
+            <small>({{ product.ratingsQuantity }})</small></span
+          >
+        </div>
+        <h2>{{ product.title }}</h2>
+        <p class="catalog-description">{{ product.description }}</p>
+        <div class="catalog-price-row">
+          <strong>{{ product.price }} <small>EGP</small></strong
+          ><span
+            >{{ product.quantity === 0 ? 'Currently unavailable' : 'A few left:
+            ' + product.quantity }}</span
+          >
+        </div>
+        <div class="catalog-actions">
+          <button
+            class="btn btn-dark"
+            [disabled]="product.quantity === 0"
+            (click)="addToCart(product)"
+          >
+            <i class="fa-solid fa-bag-shopping me-2" aria-hidden="true"></i>Add
+            to bag</button
+          ><a
+            class="catalog-detail-link"
+            [routerLink]="['/products/productdetails', product._id]"
+            >Details</a
+          >
+        </div>
+      </div>
+    </article>
     }
   </div>
+  <nav class="catalog-pagination" aria-label="Product pages">
+    <button
+      class="page-arrow"
+      type="button"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)"
+    >
+      <span aria-hidden="true">←</span> Previous
+    </button>
+    <div class="page-list">
+      @for (page of pageNumbers; track page) {
+      <button
+        type="button"
+        class="page-number"
+        [class.active]="currentPage === page"
+        [attr.aria-current]="currentPage === page ? 'page' : null"
+        [attr.aria-label]="'Page ' + page"
+        (click)="changePage(page)"
+      >
+        {{ page }}
+      </button>
+      }
+    </div>
+    <button
+      class="page-arrow"
+      type="button"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)"
+    >
+      Next <span aria-hidden="true">→</span>
+    </button>
+  </nav>
+  } @else {
+  <div class="catalog-empty">
+    <span aria-hidden="true">⌕</span>
+    <h2>No pieces found</h2>
+    <p>Try another search or browse all categories.</p>
+    <button
+      type="button"
+      class="button button-dark"
+      (click)="searchBox.value = ''; setSearch(''); selectCategory('All')"
+    >
+      Clear filters <span aria-hidden="true">↗</span>
+    </button>
+  </div>
+  }
 </div>
-

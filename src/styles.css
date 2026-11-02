@@ -1,15 +1,218 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-:root { --cream: #fbf8f3; --paper: #f6eee6; --rose: #eadbd1; --ink: #302622; --muted: #796b64; --body: 'DM Sans', sans-serif; --display: 'Playfair Display', Georgia, serif; --bs-body-font-family: var(--body); --bs-body-color: var(--ink); --bs-body-bg: var(--cream); --bs-primary: #8d6254; }
-html, body { min-height: 100%; margin: 0; scroll-behavior: smooth; }
-body { min-height: 100vh; background: var(--cream); color: var(--ink); font-family: var(--body); font-size: 15px; -webkit-font-smoothing: antialiased; }
-app-root { min-height: 100vh; display: flex; flex-direction: column; }
-.main-content { flex: 1; }
-app-navbar { display: block; position: sticky; top: 0; z-index: 1030; }
-::selection { color: var(--ink); background: #e5c9ba; }
-a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #9b6555; outline-offset: 3px; }
-.btn { border-radius: 0; font-weight: 600; transition: transform .2s ease, background-color .2s ease, border-color .2s ease; }
-.btn:hover:not(:disabled) { transform: translateY(-2px); }
-.btn-dark { --bs-btn-bg: var(--ink); --bs-btn-border-color: var(--ink); --bs-btn-hover-bg: #704a41; --bs-btn-hover-border-color: #704a41; }
-.form-control { border-radius: 0; border-color: #dfd3c9; background-color: #fffdfa; padding: .8rem .9rem; }
-.form-control:focus { border-color: #9b6555; box-shadow: 0 0 0 .2rem rgba(155,101,85,.12); }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
+
+:root {
+  color-scheme: light;
+  --color-bg: #fbf8f3;
+  --color-surface: #fffdfa;
+  --color-surface-muted: #f6eee6;
+  --color-surface-contrast: #e9dfd4;
+  --color-surface-inset: #f0e9df;
+  --color-surface-hover: #f3ece4;
+  --color-text: #302622;
+  --color-text-soft: #594b44;
+  --color-text-muted: #796b64;
+  --color-border: #ded1c6;
+  --color-border-subtle: #e7ddd3;
+  --color-accent: #8e6255;
+  --color-accent-strong: #493932;
+  --color-accent-soft: #eadbd1;
+  --color-control-bg: #493932;
+  --color-control-text: #fffaf4;
+  --color-control-hover: #704a41;
+  --color-on-control-hover: #fffaf4;
+  --color-field-bg: #fffdfa;
+  --color-field-border: #dfd3c9;
+  --color-focus: #9b6555;
+  --color-deep-accent: #815548;
+  --color-danger: #a73f46;
+  --color-danger-bg: #f8e3e3;
+  --color-danger-border: #edc5c7;
+  --color-success: #28734a;
+  --color-success-bg: #e0f0e5;
+  --color-success-border: #b8ddc5;
+  --color-nav-bg: rgba(251, 248, 243, 0.97);
+  --color-nav-border: #eee6dd;
+  --color-nav-icon-filter: none;
+  --body: "DM Sans", sans-serif;
+  --display: "Playfair Display", Georgia, serif;
+}
+
+/* Dark mode swaps the palette only. Components consume the same semantic tokens. */
+body.theme-dark {
+  color-scheme: dark;
+  --color-bg: #211b18;
+  --color-surface: #2b231f;
+  --color-surface-muted: #302621;
+  --color-surface-contrast: #382c27;
+  --color-surface-inset: #342a24;
+  --color-surface-hover: #3a2e28;
+  --color-text: #f3e9e0;
+  --color-text-soft: #ded1c8;
+  --color-text-muted: #c2b4aa;
+  --color-border: #594940;
+  --color-border-subtle: #493c34;
+  --color-accent: #d0a18b;
+  --color-accent-strong: #c18e77;
+  --color-accent-soft: #493832;
+  --color-control-bg: #d0a18b;
+  --color-control-text: #211b18;
+  --color-control-hover: #e4b8a2;
+  --color-on-control-hover: #211b18;
+  --color-field-bg: #211b18;
+  --color-field-border: #594940;
+  --color-focus: #d0a18b;
+  --color-deep-accent: #9b6251;
+  --color-danger: #f0a2a6;
+  --color-danger-bg: #48272b;
+  --color-danger-border: #743b42;
+  --color-success: #9ad5ae;
+  --color-success-bg: #23392c;
+  --color-success-border: #3d674c;
+  --color-nav-bg: rgba(37, 30, 26, 0.98);
+  --color-nav-border: #493c34;
+  --color-nav-icon-filter: invert(1) grayscale(1);
+  --bs-primary-rgb: 208, 161, 139;
+  --bs-dark-rgb: 243, 233, 224;
+  --bs-light-rgb: 43, 35, 31;
+  --bs-danger-rgb: 240, 162, 166;
+  --bs-success-rgb: 154, 213, 174;
+}
+
+/* Resolve Bootstrap's derived colors on body so they follow its active palette. */
+body {
+  --cream: var(--color-bg);
+  --paper: var(--color-surface-muted);
+  --rose: var(--color-accent-soft);
+  --ink: var(--color-text);
+  --muted: var(--color-text-muted);
+  --bs-body-font-family: var(--body);
+  --bs-body-color: var(--color-text);
+  --bs-body-bg: var(--color-bg);
+  --bs-emphasis-color: var(--color-text);
+  --bs-secondary-color: var(--color-text-muted);
+  --bs-tertiary-color: var(--color-text-muted);
+  --bs-border-color: var(--color-border);
+  --bs-primary: var(--color-accent);
+  --bs-primary-rgb: 142, 98, 85;
+  --bs-dark-rgb: 48, 38, 34;
+  --bs-light-rgb: 255, 253, 250;
+  --bs-danger-rgb: 167, 63, 70;
+  --bs-success-rgb: 40, 115, 74;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  color-scheme: light;
+  font-family: var(--body);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main-content {
+  flex: 1;
+}
+app-navbar {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+::selection {
+  color: var(--color-text);
+  background: var(--color-accent-soft);
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+.btn {
+  border-radius: 0;
+  font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.btn-dark,
+.btn-primary {
+  --bs-btn-color: var(--color-control-text);
+  --bs-btn-bg: var(--color-control-bg);
+  --bs-btn-border-color: var(--color-control-bg);
+  --bs-btn-hover-color: var(--color-on-control-hover);
+  --bs-btn-hover-bg: var(--color-control-hover);
+  --bs-btn-hover-border-color: var(--color-control-hover);
+  --bs-btn-active-bg: var(--color-control-hover);
+  --bs-btn-active-border-color: var(--color-control-hover);
+}
+.btn-outline-secondary {
+  --bs-btn-color: var(--color-text-soft);
+  --bs-btn-border-color: var(--color-border);
+  --bs-btn-hover-bg: var(--color-surface-contrast);
+  --bs-btn-hover-color: var(--color-text);
+  --bs-btn-hover-border-color: var(--color-accent-strong);
+}
+.btn-outline-danger {
+  --bs-btn-color: var(--color-danger);
+  --bs-btn-border-color: var(--color-danger-border);
+  --bs-btn-hover-bg: var(--color-danger-bg);
+  --bs-btn-hover-color: var(--color-danger);
+  --bs-btn-hover-border-color: var(--color-danger);
+}
+.alert-danger {
+  --bs-alert-color: var(--color-danger);
+  --bs-alert-bg: var(--color-danger-bg);
+  --bs-alert-border-color: var(--color-danger-border);
+}
+.alert-success {
+  --bs-alert-color: var(--color-success);
+  --bs-alert-bg: var(--color-success-bg);
+  --bs-alert-border-color: var(--color-success-border);
+}
+.text-danger {
+  color: var(--color-danger) !important;
+}
+.text-success {
+  color: var(--color-success) !important;
+}
+.form-control {
+  border-radius: 0;
+  border-color: var(--color-field-border);
+  color: var(--color-text);
+  background-color: var(--color-field-bg);
+  padding: 0.8rem 0.9rem;
+}
+.form-control::placeholder {
+  color: var(--color-text-muted);
+}
+.form-control:focus {
+  border-color: var(--color-focus);
+  color: var(--color-text);
+  background-color: var(--color-field-bg);
+  box-shadow: 0 0 0 0.2rem
+    color-mix(in srgb, var(--color-focus) 18%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

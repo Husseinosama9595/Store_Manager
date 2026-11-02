@@ -1,10 +1,50 @@
-:host{display:block;background:radial-gradient(ellipse at 10% 15%,rgba(226,204,190,.42),transparent 35%),var(--cream)}
-.container-fluid.min-vh-100{min-height:calc(100vh - 180px)!important;padding:55px 18px;background:transparent!important}
-.container-fluid>.card{border-radius:0!important;border:1px solid #eadfd5!important;background:rgba(255,253,250,.9);box-shadow:0 20px 60px rgba(69,47,37,.09)!important}
-.card h2{font-family:var(--display);font-weight:400!important;font-size:2.3rem}
-.card .text-muted{color:#84756c!important}
-.form-label{color:#493932;font-size:.76rem}
-.form-control-lg{font-size:.9rem!important;border-radius:0!important;box-shadow:none!important}
-.btn-primary{--bs-btn-bg:#493932;--bs-btn-border-color:#493932;--bs-btn-hover-bg:#704a41;--bs-btn-hover-border-color:#704a41;border-radius:0!important;font-size:.84rem!important}
-.text-primary{color:#8e6255!important}
-.card a.text-decoration-none:hover{text-decoration:underline!important}
+:host {
+  display: block;
+  background:
+    radial-gradient(
+      ellipse at 10% 15%,
+      color-mix(in srgb, var(--color-accent) 16%, transparent),
+      transparent 35%
+    ),
+    var(--color-bg);
+}
+.container-fluid.min-vh-100 {
+  min-height: calc(100vh - 180px) !important;
+  padding: 55px 18px;
+  background: transparent !important;
+}
+.container-fluid > .card {
+  border-radius: 0 !important;
+  border: 1px solid var(--color-border-subtle) !important;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  box-shadow: 0 20px 60px color-mix(in srgb, var(--color-text) 10%, transparent) !important;
+}
+.card h2 {
+  color: var(--color-text);
+  font-family: var(--display);
+  font-weight: 400 !important;
+  font-size: 2.3rem;
+}
+.card .text-muted {
+  color: var(--color-text-muted) !important;
+}
+.form-label {
+  color: var(--color-text-soft);
+  font-size: 0.76rem;
+}
+.form-control-lg {
+  font-size: 0.9rem !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.btn-primary {
+  border-radius: 0 !important;
+  font-size: 0.84rem !important;
+}
+.text-primary {
+  color: var(--color-accent) !important;
+}
+.card a.text-decoration-none:hover {
+  text-decoration: underline !important;
+}

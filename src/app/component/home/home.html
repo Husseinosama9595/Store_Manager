@@ -1,9 +1,184 @@
-<section class="atelier-hero" [style.background-image]="'linear-gradient(90deg, rgba(31, 25, 23, .72) 0%, rgba(31, 25, 23, .37) 52%, rgba(31, 25, 23, .04) 100%), url(' + campaign.image + ')'">
-  <div class="hero-grain" aria-hidden="true"></div><div class="container hero-inner"><div class="hero-copy" aria-live="polite"><p class="eyebrow hero-eyebrow">{{ campaign.eyebrow }}</p><h1>{{ campaign.title }}</h1><p class="hero-description">{{ campaign.description }}</p><div class="hero-actions"><a routerLink="/products" class="button button-light">Explore the collection <span aria-hidden="true">↗</span></a><a routerLink="/products" class="hero-text-link">Discover the story <span aria-hidden="true">↓</span></a></div></div><div class="hero-bottomline"><span class="hero-caption">{{ campaign.label }}</span><div class="carousel-controls" aria-label="Campaign slides"><button type="button" aria-label="Previous campaign" (click)="showCampaign(activeCampaign - 1)">←</button><span>0{{ activeCampaign + 1 }} <i>/</i> 0{{ campaigns.length }}</span><button type="button" aria-label="Next campaign" (click)="showCampaign(activeCampaign + 1)">→</button></div></div></div><span class="hero-side-note" aria-hidden="true">SHAWL WEAR · EST. WITH INTENTION</span>
+<section
+  class="atelier-hero"
+  [style.background-image]="'linear-gradient(90deg, rgba(31, 25, 23, .72) 0%, rgba(31, 25, 23, .37) 52%, rgba(31, 25, 23, .04) 100%), url(' + campaign.image + ')'"
+>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy" aria-live="polite">
+      <p class="eyebrow hero-eyebrow">{{ campaign.eyebrow }}</p>
+      <h1>{{ campaign.title }}</h1>
+      <p class="hero-description">{{ campaign.description }}</p>
+      <div class="hero-actions">
+        <a routerLink="/products" class="button button-light"
+          >Explore the collection <span aria-hidden="true">↗</span></a
+        ><a routerLink="/products" class="hero-text-link"
+          >Discover the story <span aria-hidden="true">↓</span></a
+        >
+      </div>
+    </div>
+    <div class="hero-bottomline">
+      <span class="hero-caption">{{ campaign.label }}</span>
+      <div class="carousel-controls" aria-label="Campaign slides">
+        <button
+          type="button"
+          aria-label="Previous campaign"
+          (click)="showCampaign(activeCampaign - 1)"
+        >
+          ←</button
+        ><span>0{{ activeCampaign + 1 }} <i>/</i> 0{{ campaigns.length }}</span
+        ><button
+          type="button"
+          aria-label="Next campaign"
+          (click)="showCampaign(activeCampaign + 1)"
+        >
+          →
+        </button>
+      </div>
+    </div>
+  </div>
+  <span class="hero-side-note" aria-hidden="true"
+    >SHAWL WEAR · EST. WITH INTENTION</span
+  >
 </section>
-<section class="service-strip" aria-label="Shopping benefits"><div class="container service-grid"><p><span>✳</span> Thoughtfully chosen</p><p><span>✳</span> Style for every day</p><p><span>✳</span> A little joy, delivered</p></div></section>
-<section class="arrivals-section section-space"><div class="container"><div class="section-heading"><div><p class="eyebrow">A FRESH PERSPECTIVE</p><h2>Meet your new favourites<span>.</span></h2></div><a routerLink="/products" class="underlined-link">Shop all products <span aria-hidden="true">↗</span></a></div>
-@if (products.length) { <div class="row g-4 arrivals-grid">@for (item of products; track item._id; let i = $index) { <div class="col-6 col-lg-3"><a class="editorial-product" [routerLink]="['/products/productdetails', item._id]"><div class="editorial-image" [class.image-warm]="i % 2 === 0"><img [src]="item.imageCover" [alt]="item.title" loading="lazy"><span class="product-tag">{{ i === 0 ? 'JUST IN' : 'THE EDIT' }}</span><span class="quick-view" aria-hidden="true">↗</span></div><div class="editorial-product-meta"><div><p class="product-brand">{{ item.brand.name }}</p><h3>{{ item.title }}</h3></div><strong>{{ item.price }} <small>EGP</small></strong></div></a></div> } </div> } @else { <div class="product-loading"><span class="loading-dot"></span> Curating the latest finds…</div> }</div></section>
-<section class="category-section section-space"><div class="container"><div class="section-heading category-heading"><div><p class="eyebrow">A WORLD OF YOUR OWN</p><h2>Browse by mood<span>.</span></h2></div><p>Good style starts with what feels like you.</p></div><div class="category-editorial-grid"><a class="category-tile category-tile-large" routerLink="/products" style="--tile-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=85')"><span class="tile-index">01 / THE EDIT</span><span class="tile-title">The considered<br>wardrobe <i>↗</i></span></a><a class="category-tile" routerLink="/products" style="--tile-image: url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85')"><span class="tile-index">02 / STYLE NOTES</span><span class="tile-title">The finishing touches <i>↗</i></span></a><a class="category-tile" routerLink="/products" style="--tile-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=85')"><span class="tile-index">03 / EVERYDAY</span><span class="tile-title">Made to be yours <i>↗</i></span></a></div></div></section>
-<section id="story" class="story-section"><div class="container story-layout"><div class="story-image-wrap"><img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1200&q=85" alt="A thoughtfully styled fashion collection" loading="lazy"><span class="story-stamp">A LITTLE<br>MORE YOU</span></div><div class="story-copy"><p class="eyebrow">THE SHAWL WEAR POINT OF VIEW</p><h2>Style should feel<br>like <em>coming home.</em></h2><p>We believe getting dressed can be a small, lovely ritual. Shawl Wear brings together pieces with warmth, character, and room for your own point of view.</p><a routerLink="/products" class="button button-dark">Find your next favourite <span aria-hidden="true">↗</span></a><span class="story-signoff">With love, Shawl Wear</span></div></div></section>
-<section id="style-notes" class="style-notes section-space"><div class="container notes-layout"><div><p class="eyebrow">A NOTE FROM OUR WORLD</p><h2>Wear what<br>feels like <em>you.</em></h2><p>New finds, thoughtful details, and a little inspiration for the everyday.</p></div><div class="notes-gallery"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=700&q=80" alt="Fashion look from the Shawl Wear edit" loading="lazy"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80" alt="A day of discovering personal style" loading="lazy"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=80" alt="A considered outfit in warm tones" loading="lazy"></div></div></section>
+<section class="service-strip" aria-label="Shopping benefits">
+  <div class="container service-grid">
+    <p><span>✳</span> Thoughtfully chosen</p>
+    <p><span>✳</span> Style for every day</p>
+    <p><span>✳</span> A little joy, delivered</p>
+  </div>
+</section>
+<section class="arrivals-section section-space">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A FRESH PERSPECTIVE</p>
+        <h2>Meet your new favourites<span>.</span></h2>
+      </div>
+      <a routerLink="/products" class="underlined-link"
+        >Shop all products <span aria-hidden="true">↗</span></a
+      >
+    </div>
+    @if (products.length) {
+    <div class="row g-4 arrivals-grid">
+      @for (item of products; track item._id; let i = $index) {
+      <div class="col-6 col-lg-3">
+        <a
+          class="editorial-product"
+          [routerLink]="['/products/productdetails', item._id]"
+          ><div class="editorial-image" [class.image-warm]="i % 2 === 0">
+            <img
+              [src]="item.imageCover"
+              [alt]="item.title"
+              loading="lazy"
+            /><span class="product-tag"
+              >{{ i === 0 ? 'JUST IN' : 'THE EDIT' }}</span
+            ><span class="quick-view" aria-hidden="true">↗</span>
+          </div>
+          <div class="editorial-product-meta">
+            <div>
+              <p class="product-brand">{{ item.brand.name }}</p>
+              <h3>{{ item.title }}</h3>
+            </div>
+            <strong>{{ item.price }} <small>EGP</small></strong>
+          </div></a
+        >
+      </div>
+      }
+    </div>
+    } @else {
+    <div class="product-loading">
+      <span class="loading-dot"></span> Curating the latest finds…
+    </div>
+    }
+  </div>
+</section>
+<section class="category-section section-space">
+  <div class="container">
+    <div class="section-heading category-heading">
+      <div>
+        <p class="eyebrow">A WORLD OF YOUR OWN</p>
+        <h2>Browse by mood<span>.</span></h2>
+      </div>
+      <p>Good style starts with what feels like you.</p>
+    </div>
+    <div class="category-editorial-grid">
+      <a
+        class="category-tile category-tile-large"
+        routerLink="/products"
+        style="
+          --tile-image: url(&quot;https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=85&quot;);
+        "
+        ><span class="tile-index">01 / THE EDIT</span
+        ><span class="tile-title"
+          >The considered<br />wardrobe <i>↗</i></span
+        ></a
+      ><a
+        class="category-tile"
+        routerLink="/products"
+        style="
+          --tile-image: url(&quot;https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85&quot;);
+        "
+        ><span class="tile-index">02 / STYLE NOTES</span
+        ><span class="tile-title">The finishing touches <i>↗</i></span></a
+      ><a
+        class="category-tile"
+        routerLink="/products"
+        style="
+          --tile-image: url(&quot;https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=85&quot;);
+        "
+        ><span class="tile-index">03 / EVERYDAY</span
+        ><span class="tile-title">Made to be yours <i>↗</i></span></a
+      >
+    </div>
+  </div>
+</section>
+<section id="story" class="story-section">
+  <div class="container story-layout">
+    <div class="story-image-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1200&q=85"
+        alt="A thoughtfully styled fashion collection"
+        loading="lazy"
+      /><span class="story-stamp">A LITTLE<br />MORE YOU</span>
+    </div>
+    <div class="story-copy">
+      <p class="eyebrow">THE SHAWL WEAR POINT OF VIEW</p>
+      <h2>Style should feel<br />like <em>coming home.</em></h2>
+      <p>
+        We believe getting dressed can be a small, lovely ritual. Shawl Wear
+        brings together pieces with warmth, character, and room for your own
+        point of view.
+      </p>
+      <a routerLink="/products" class="button button-dark"
+        >Find your next favourite <span aria-hidden="true">↗</span></a
+      ><span class="story-signoff">With love, Shawl Wear</span>
+    </div>
+  </div>
+</section>
+<section id="style-notes" class="style-notes section-space">
+  <div class="container notes-layout">
+    <div>
+      <p class="eyebrow">A NOTE FROM OUR WORLD</p>
+      <h2>Wear what<br />feels like <em>you.</em></h2>
+      <p>
+        New finds, thoughtful details, and a little inspiration for the
+        everyday.
+      </p>
+    </div>
+    <div class="notes-gallery">
+      <img
+        src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=700&q=80"
+        alt="Fashion look from the Shawl Wear edit"
+        loading="lazy"
+      /><img
+        src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80"
+        alt="A day of discovering personal style"
+        loading="lazy"
+      /><img
+        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=80"
+        alt="A considered outfit in warm tones"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>

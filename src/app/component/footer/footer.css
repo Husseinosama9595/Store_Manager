@@ -1,18 +1,122 @@
-:host { display:block; }
-.atelier-footer { padding:66px 0 18px; color:#f6eee6; background:#382c27; }
-.footer-main { display:grid; grid-template-columns:1.5fr .8fr .9fr 1.1fr; gap:35px; padding-bottom:54px; }
-.footer-brand { display:inline-block; color:#fff8f0; text-decoration:none; font-family:var(--display); font-size:1.8rem; letter-spacing:-.05em; }
-.footer-brand span { display:block; margin-top:3px; color:#c59f8c; font-family:var(--body); font-size:.52rem; letter-spacing:.19em; }
-.footer-brand-column p { margin:17px 0; color:#c5b5aa; font-size:.8rem; }
-.footer-socials { display:flex; gap:9px; }
-.footer-socials a { width:31px; height:31px; display:grid; place-items:center; border:1px solid #79675c; color:#f6eee6; border-radius:50%; font-size:.75rem; text-decoration:none; transition:background .2s; }
-.footer-socials a:hover { background:#8e6255; }
-.footer-links-column { display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
-.footer-label { margin-bottom:5px; color:#c59f8c; font-size:.59rem; font-weight:700; letter-spacing:.16em; }
-.footer-links-column a { color:#e2d7ce; font-size:.78rem; text-decoration:none; transition:color .2s; }
-.footer-links-column a:hover { color:#fff; }
-.footer-note { position:relative; min-height:130px; padding:20px; background:#493932; }
-.footer-note p { position:relative; z-index:1; margin:9px 0 0; font-family:var(--display); font-size:1.28rem; line-height:1.4; }
-.footer-flower { position:absolute; right:15px; bottom:0; color:#6e5549; font-size:4.5rem; }
-.footer-bottom { display:flex; justify-content:space-between; gap:15px; padding-top:17px; border-top:1px solid #594941; color:#ae9f95; font-size:.65rem; }
-@media(max-width:767.98px){.footer-main{grid-template-columns:1fr 1fr;gap:36px 22px}.footer-brand-column{grid-column:1/-1}.footer-note{min-height:120px}.footer-bottom{flex-direction:column;gap:7px}}
+:host {
+  display: block;
+}
+.atelier-footer {
+  padding: 66px 0 18px;
+  color: #f6eee6;
+  background: #382c27;
+}
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr 0.9fr 1.1fr;
+  gap: 35px;
+  padding-bottom: 54px;
+}
+.footer-brand {
+  display: inline-block;
+  color: #fff8f0;
+  text-decoration: none;
+  font-family: var(--display);
+  font-size: 1.8rem;
+  letter-spacing: -0.05em;
+}
+.footer-brand span {
+  display: block;
+  margin-top: 3px;
+  color: #c59f8c;
+  font-family: var(--body);
+  font-size: 0.52rem;
+  letter-spacing: 0.19em;
+}
+.footer-brand-column p {
+  margin: 17px 0;
+  color: #c5b5aa;
+  font-size: 0.8rem;
+}
+.footer-socials {
+  display: flex;
+  gap: 9px;
+}
+.footer-socials a {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #79675c;
+  color: #f6eee6;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.footer-socials a:hover {
+  background: #8e6255;
+}
+.footer-links-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.footer-label {
+  margin-bottom: 5px;
+  color: #c59f8c;
+  font-size: 0.59rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+.footer-links-column a {
+  color: #e2d7ce;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links-column a:hover {
+  color: #fff;
+}
+.footer-note {
+  position: relative;
+  min-height: 130px;
+  padding: 20px;
+  background: #493932;
+}
+.footer-note p {
+  position: relative;
+  z-index: 1;
+  margin: 9px 0 0;
+  font-family: var(--display);
+  font-size: 1.28rem;
+  line-height: 1.4;
+}
+.footer-flower {
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+  color: #6e5549;
+  font-size: 4.5rem;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding-top: 17px;
+  border-top: 1px solid #594941;
+  color: #ae9f95;
+  font-size: 0.65rem;
+}
+@media (max-width: 767.98px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 22px;
+  }
+  .footer-brand-column {
+    grid-column: 1/-1;
+  }
+  .footer-note {
+    min-height: 120px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 7px;
+  }
+}

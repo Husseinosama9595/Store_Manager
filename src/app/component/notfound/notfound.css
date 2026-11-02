@@ -1,3 +1,19 @@
-.custom-bg{min-height:55vh;background:linear-gradient(135deg,#f3e8df,#eadbd1)}
-.custom-btn{color:#fffaf4!important;background:#493932!important;border:0!important;border-radius:0!important}
-.custom-btn:hover{background:#704a41!important}
+.custom-bg {
+  min-height: 55vh;
+  background: linear-gradient(
+    135deg,
+    var(--color-surface-muted),
+    var(--color-accent-soft)
+  );
+  color: var(--color-text);
+}
+.custom-btn {
+  color: var(--color-control-text) !important;
+  background: var(--color-control-bg) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+.custom-btn:hover {
+  background: var(--color-control-hover) !important;
+  color: var(--color-on-control-hover) !important;
+}

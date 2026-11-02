@@ -1,19 +1,21 @@
-import { Injectable, computed, effect, inject, signal } from '@angular/core';
-import { Product } from '../products/product-list/product-list';
-import { ToastService } from './toast.service';
+import { Injectable, computed, effect, inject, signal } from "@angular/core";
+import { Product } from "../products/product-list/product-list";
+import { ToastService } from "./toast.service";
 
-
-export type CartProduct = Pick<Product, '_id' | 'title' | 'imageCover' | 'price' | 'quantity'>;
+export type CartProduct = Pick<
+  Product,
+  "_id" | "title" | "imageCover" | "price" | "quantity"
+>;
 
 export interface CartItem {
   product: CartProduct;
   quantity: number;
 }
 
-const STORAGE_KEY = 'shawlwear.cart.v1';
+const STORAGE_KEY = "shawlwear.cart.v1";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class CartService {
   private readonly toast = inject(ToastService);
@@ -22,7 +24,9 @@ export class CartService {
 
   readonly items = this._items.asReadonly();
 
-  readonly count = computed(() => this._items().reduce((n, i) => n + i.quantity, 0));
+  readonly count = computed(() =>
+    this._items().reduce((n, i) => n + i.quantity, 0),
+  );
   readonly total = computed(() =>
     this._items().reduce((sum, i) => sum + i.product.price * i.quantity, 0),
   );
@@ -33,7 +37,7 @@ export class CartService {
 
   add(product: Product): void {
     if (product.quantity < 1) {
-      this.toast.show('This product is out of stock.', 'warning');
+      this.toast.show("This product is out of stock.", "warning");
       return;
     }
 
@@ -41,12 +45,17 @@ export class CartService {
 
     if (existing) {
       if (existing.quantity >= product.quantity) {
-        this.toast.show(`Only ${product.quantity} available in stock.`, 'warning');
+        this.toast.show(
+          `Only ${product.quantity} available in stock.`,
+          "warning",
+        );
         return;
       }
       this._items.update((items) =>
         items.map((i) =>
-          i === existing ? { product: this.toCartProduct(product), quantity: i.quantity + 1 } : i,
+          i === existing
+            ? { product: this.toCartProduct(product), quantity: i.quantity + 1 }
+            : i,
         ),
       );
     } else {
@@ -56,14 +65,14 @@ export class CartService {
       ]);
     }
 
-    this.toast.show(`"${product.title}" added to your cart.`, 'success');
+    this.toast.show(`"${product.title}" added to your cart.`, "success");
   }
 
   remove(id: string): void {
     const item = this._items().find((i) => i.product._id === id);
     if (!item) return;
     this._items.update((items) => items.filter((i) => i.product._id !== id));
-    this.toast.show('Item removed from your cart.', 'info');
+    this.toast.show("Item removed from your cart.", "info");
   }
 
   changeQuantity(id: string, change: number): void {
@@ -97,7 +106,6 @@ export class CartService {
     };
   }
 
-
   private readStorage(): CartItem[] {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -106,7 +114,10 @@ export class CartService {
       if (!Array.isArray(parsed)) return [];
       return parsed
         .filter(isCartItem)
-        .map((i) => ({ ...i, quantity: Math.min(i.quantity, i.product.quantity) }))
+        .map((i) => ({
+          ...i,
+          quantity: Math.min(i.quantity, i.product.quantity),
+        }))
         .filter((i) => i.quantity >= 1);
     } catch {
       return [];
@@ -123,13 +134,13 @@ export class CartService {
 }
 
 function isCartItem(value: unknown): value is CartItem {
-  if (typeof value !== 'object' || value === null) return false;
+  if (typeof value !== "object" || value === null) return false;
   const { product, quantity } = value as Partial<CartItem>;
   return (
     !!product &&
-    typeof product._id === 'string' &&
-    typeof product.title === 'string' &&
-    typeof product.imageCover === 'string' &&
+    typeof product._id === "string" &&
+    typeof product.title === "string" &&
+    typeof product.imageCover === "string" &&
     Number.isFinite(product.price) &&
     Number.isFinite(product.quantity) &&
     Number.isInteger(quantity) &&
