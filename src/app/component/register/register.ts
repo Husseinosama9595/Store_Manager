@@ -11,7 +11,16 @@ import { Router } from "@angular/router";
 export class Register {
   private FB = inject(FormBuilder);
   private router = inject(Router);
+  showPassword: boolean = false;
+showConfirmPassword: boolean = false;
 
+togglePasswordVisibility(): void {
+  this.showPassword = !this.showPassword;
+}
+
+toggleConfirmPasswordVisibility(): void {
+  this.showConfirmPassword = !this.showConfirmPassword;
+}
   passwordMatchValidator: ValidatorFn = (
     control: AbstractControl
   ): ValidationErrors | null => {
