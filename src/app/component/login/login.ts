@@ -16,6 +16,13 @@ export class Login {
     password: "",
   };
 
+
+showPassword: boolean = false;
+
+togglePasswordVisibility(): void {
+  this.showPassword = !this.showPassword;
+}
+
   onSubmit(form: NgForm) {
     if (form.valid) {
       console.log(
