@@ -3,10 +3,11 @@ import { RouterOutlet } from "@angular/router";
 import { Navbar } from "./component/navbar/navbar";
 import { Footer } from "./component/footer/footer";
 import { Toast } from "./component/toast/toast";
+import { BackToTop } from "./back-to-top/back-to-top";
 
 @Component({
   selector: "app-root",
-  imports: [RouterOutlet, Navbar, Footer, Toast],
+  imports: [RouterOutlet, Navbar, Footer, Toast, BackToTop],
   templateUrl: "./app.html",
   styleUrl: "./app.css",
 })
